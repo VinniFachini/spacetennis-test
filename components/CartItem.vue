@@ -264,6 +264,7 @@ export default {
     height: 100% !important;
     max-height: 150px !important;
     flex-grow: 1 !important;
+    align-items: center;
   }
   .product-info .product-name,
   .product-info .product-size,

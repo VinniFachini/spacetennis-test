@@ -36,18 +36,33 @@
           </div>
           <div class="frete">
             <div class="form-group">
-              <the-mask class="form-input" mask="#####-###" value="" type="tel" masked="true" placeholder="CEP"></the-mask>
+              <the-mask
+                class="form-input"
+                mask="#####-###"
+                value=""
+                type="tel"
+                :masked="true"
+                placeholder="CEP"
+              />
               <input type="button" value="CALCULAR FRETE" />
             </div>
             <div class="fretes">Fretes:</div>
           </div>
           <div class="total">
             <span>total</span>
-            <div class="total-price">R$ {{ totalPrice | money }}</div>
+            <div class="total-price">R$ {{ applyDiscount | money }}</div>
           </div>
           <div class="form-group-cupom">
-            <input placeholder="Cupom de desconto" type="text" />
-            <input type="button" value="USAR" />
+            <the-mask
+              ref="discount"
+              class="form-input"
+              mask="XXXXX"
+              value=""
+              type="tel"
+              :masked="true"
+              placeholder="Cupom de desconto"
+            />
+            <input @click="getDiscount" type="button" value="USAR" />
           </div>
           <input type="button" value="FINALIZAR COMPRA" />
         </div>
@@ -68,7 +83,7 @@
 </template>
 
 <script>
-import {TheMask} from 'vue-the-mask'
+import { TheMask } from "vue-the-mask";
 import Item from "~/components/Item.vue";
 export default {
   data() {
@@ -76,9 +91,15 @@ export default {
       items: [],
       cartItems: [],
       suggestionItems: [],
+      discount: 0
     };
   },
   methods: {
+    getDiscount(){
+      if(this.$refs.discount.display <= 35) {
+        this.discount = this.$refs.discount.display / 100;
+      } else {return}
+    },
     deleteEveryItem() {
       if (this.$refs.child.length >= 1) {
         this.items = [];
@@ -107,6 +128,9 @@ export default {
     },
   },
   computed: {
+    applyDiscount() {
+      return this.totalPrice - (this.totalPrice * this.discount)
+    },
     totalPrice() {
       return this.items
         .map((item) => item.ammount * item.itemPrice)
@@ -119,12 +143,12 @@ export default {
     };
   },
   async fetch() {
-    this.cartItems = await fetch("https://spacetennis-express-api.vercel.app/api/products?max=2").then(
-      (res) => res.json()
-    );
-    this.suggestionItems = await fetch("https://spacetennis-express-api.vercel.app/api/products?max=4").then(
-      (res) => res.json()
-    );
+    this.cartItems = await fetch(
+      "https://spacetennis-express-api.vercel.app/api/products?max=2"
+    ).then((res) => res.json());
+    this.suggestionItems = await fetch(
+      "https://spacetennis-express-api.vercel.app/api/products?max=4"
+    ).then((res) => res.json());
   },
   filters: {
     money: function (value) {
@@ -275,7 +299,6 @@ main {
   padding: 0 2px;
 }
 
-
 .frete .form-group .form-input {
   border: 1px solid #ccc;
   padding: 10px;
@@ -344,7 +367,7 @@ main {
   padding-block: 10px;
   border-bottom: 1px solid #ccc;
 }
-.form-group-cupom > input[type="text"] {
+.form-group-cupom > .form-input {
   border: 1px solid #ccc;
   padding: 10px;
   flex-grow: 4;

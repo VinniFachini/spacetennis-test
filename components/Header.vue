@@ -240,7 +240,7 @@
     </div>
     <div style="display: none" class="search-querry">
       <div class="form-group">
-        <input type="text" placeholder="DIGITE O QUE PROCURA" />
+        <input class="input" type="text" placeholder="DIGITE O QUE PROCURA" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21.811"
@@ -513,7 +513,7 @@ header {
     justify-content: space-between;
     margin: 0 2%;
   }
-  .form-group input[type="text"] {
+  .form-group .input {
     all: unset;
     font-size: 0.875em;
   }

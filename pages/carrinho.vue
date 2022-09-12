@@ -36,7 +36,7 @@
           </div>
           <div class="frete">
             <div class="form-group">
-              <input type="number" />
+              <the-mask class="form-input" mask="#####-###" value="" type="tel" masked="true" placeholder="CEP"></the-mask>
               <input type="button" value="CALCULAR FRETE" />
             </div>
             <div class="fretes">Fretes:</div>
@@ -46,7 +46,7 @@
             <div class="total-price">R$ {{ totalPrice | money }}</div>
           </div>
           <div class="form-group-cupom">
-            <input type="text" />
+            <input placeholder="Cupom de desconto" type="text" />
             <input type="button" value="USAR" />
           </div>
           <input type="button" value="FINALIZAR COMPRA" />
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import {TheMask} from 'vue-the-mask'
 import Item from "~/components/Item.vue";
 export default {
   data() {
@@ -137,7 +138,7 @@ export default {
       }
     },
   },
-  components: { Item },
+  components: { Item, TheMask },
 };
 </script>
 
@@ -274,14 +275,8 @@ main {
   padding: 0 2px;
 }
 
-.frete .form-group input[type="number"]::-webkit-outer-spin-button,
-.frete .form-group input[type="number"]::-webkit-inner-spin-button {
-  appearance: none;
-  -webkit-appearance: none;
-  margin: 0;
-}
 
-.frete .form-group input[type="number"] {
+.frete .form-group .form-input {
   border: 1px solid #ccc;
   padding: 10px;
 }
@@ -349,13 +344,13 @@ main {
   padding-block: 10px;
   border-bottom: 1px solid #ccc;
 }
-.form-group-cupom input[type="text"] {
+.form-group-cupom > input[type="text"] {
   border: 1px solid #ccc;
   padding: 10px;
   flex-grow: 4;
 }
 
-.form-group-cupom input[type="button"] {
+.form-group-cupom > input[type="button"] {
   color: white;
   background: #222222;
   padding: 8px 15px;

@@ -118,10 +118,10 @@ export default {
     };
   },
   async fetch() {
-    this.cartItems = await fetch("http://localhost:3333/cart?max=2").then(
+    this.cartItems = await fetch("https://spacetennis-express-api.vercel.app/api/products?max=2").then(
       (res) => res.json()
     );
-    this.suggestionItems = await fetch("http://localhost:3333/cart?max=4").then(
+    this.suggestionItems = await fetch("https://spacetennis-express-api.vercel.app/api/products?max=4").then(
       (res) => res.json()
     );
   },

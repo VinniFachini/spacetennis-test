@@ -12,6 +12,22 @@
 <script>
 export default {
   props: ["itemInfo"],
+  methods: {
+    buyProducts(itemId, itemImg, itemName, itemPrice, itemSize) {
+      const list = this.$root.$refs.carrinho.cartItems
+      if(list.some(data => data.id !== itemId )) {
+        this.$root.$refs.carrinho.cartItems.push({
+            id: itemId,
+            img: itemImg,
+            name: itemName, 
+            size: itemSize,
+            price: itemPrice,
+          })
+      }else {
+        return
+      }
+    }
+  },
   filters: {
     money: function (value) {
       if (!value instanceof Number) {

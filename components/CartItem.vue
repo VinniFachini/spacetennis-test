@@ -114,6 +114,8 @@ export default {
   },
   mounted() {
     this.$emit("componentCreated", {
+      itemSize: this.$props.itemData.size,
+      itemImg: this.$props.itemData.image,
       itemId: this.$props.itemData.id,
       itemPrice: this.$props.itemData.price,
       ammount: this.ammount,

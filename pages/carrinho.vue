@@ -163,6 +163,9 @@ export default {
     },
   },
   components: { Item, TheMask },
+  created() {
+    this.$root.$refs.carrinho = this
+  },
 };
 </script>
 

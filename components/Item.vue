@@ -4,7 +4,7 @@
     <div class="info">
       <div class="item-name">{{ itemInfo.name }}</div>
       <div class="item-price">R$ {{ itemInfo.price | money }}</div>
-      <button class="btn">Comprar</button>
+      <button @click="buyProducts(itemInfo.id, itemInfo.image, itemInfo.name, itemInfo.price, itemInfo.size)" class="btn">Comprar</button>
     </div>
   </div>
 </template>
